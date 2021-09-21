@@ -4,6 +4,14 @@
       <router-link to="/">Home</router-link>
       |
       <router-link to="/about">About</router-link>
+      |
+      <router-link to="/MedianIncome">Median Income</router-link>
+      |
+      <router-link to="/PopulationInMetroArea">Population in Metro Areas</router-link>
+      |
+      <router-link to="/PopulationWithHighSchoolDiploma">Population with High School Diploma</router-link>
+      |
+      <router-link to="/Unemployment">Unemployment</router-link>
     </div>
     <router-view />
   </div>

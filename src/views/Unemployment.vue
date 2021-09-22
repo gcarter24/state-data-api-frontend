@@ -11,7 +11,7 @@
       />
     </div>
 
-    <div v-for="state in states" v-bind:key="state.id">State: {{ state.name }}</div>
+    <!-- <div v-for="state in states" v-bind:key="state.id">State: {{ state.name }}</div> -->
     <!-- <div>{{ states }}</div> -->
   </div>
 </template>

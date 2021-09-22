@@ -1,9 +1,8 @@
 <template>
   <div id="app">
+    <GChart />
     <div id="nav">
       <router-link to="/">Home</router-link>
-      |
-      <router-link to="/about">About</router-link>
       |
       <router-link to="/MedianIncome">Median Income</router-link>
       |
@@ -17,6 +16,15 @@
   </div>
 </template>
 
+<script>
+import { GChart } from "vue-google-charts";
+export default {
+  name: "App",
+  components: {
+    GChart,
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

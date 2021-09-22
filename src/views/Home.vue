@@ -1,17 +1,14 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
+    <h2>At A Glance</h2>
     <div id="contents">
-      <GChart
-        :type="chartType"
-        :settings="chartSettings"
-        :options="chartOptions"
-        :data="chartData"
-        @ready="onChartReady"
-      />
+      <GChart :type="chartType" :settings="chartSettings" :options="chartOptions" :data="chartData" />
     </div>
 
-    <div v-for="state in states" v-bind:key="state.id">State: {{ state.name }}</div>
+    <!-- <div v-for="state in states" v-bind:key="state.id">
+      State: {{ state }} | Median Income: {{ state.median_household_income }}
+    </div> -->
     <!-- <div>{{ states }}</div> -->
   </div>
 </template>
@@ -25,17 +22,20 @@ import { GChart } from "vue-google-charts";
 export default {
   data: function () {
     return {
-      states: [],
-      message: "State Data API Map",
+      message: "2016 State Data API Map",
       chartType: "GeoChart",
+
+      states: [],
       chartData: [
         [
           "State",
+
           "Median Houshold Income",
           "Seasonal Unemployment",
           // "Population In Metro Areas",
           // "Population With High School Degree",
         ],
+
         ["Alabama", 42278, 0.06],
         ["Alaska", 67629, 0.064],
         ["Arizona", 49254, 0.063],
@@ -98,10 +98,6 @@ export default {
       chartOptions: {
         region: "US",
         resolution: "provinces",
-        // regioncoderVersion: 1,
-
-        // displayMode: "auto",
-        // colorAxis: { colors: ["#00853f", "black", "#e31b23"] },
         backgroundColor: "#4da6ff",
         datalessRegionColor: "#ccffb3",
         defaultColor: "ffc2b3",
@@ -114,42 +110,14 @@ export default {
   },
   created: function () {
     this.showState();
-    // this.createMap();
-    // this.drawRegionsMap();
   },
   methods: {
-    onChartReady(chart, google) {
-      const geoChart = new google.visualization.GeoChart(`api/states`);
-      geoChart.send((response) => {
-        // const options = {
-        //   region: "US",
-        //   resolution: "provinces",
-        //   // regioncoderVersion: 1,
-
-        //   // displayMode: "auto",
-        //   // colorAxis: { colors: ["#00853f", "black", "#e31b23"] },
-        //   backgroundColor: "#4da6ff",
-        //   datalessRegionColor: "#ccffb3",
-        //   defaultColor: "ffc2b3",
-
-        //   // some custom options
-        // };
-        // const data = response.google.visualization.arrayToDataTable([
-        //   [
-        //     "State",
-        //     "Median Houshold Income",
-        //     "Seasonal Unemployment",
-        //     "Population In Metro Areas",
-        //     "Population With High School Degree",
-        //   ],
-        // ]);
-        chart.draw(response);
-      });
-    },
     showState: function () {
       axios.get(`api/states`).then((response) => {
         console.log(response.data);
+
         this.states = response.data;
+        console.log(this.states[30].median_household_income);
       });
     },
   },
